@@ -1,11 +1,13 @@
 <template>
   <div>
-    <p>Single File Component</p>
+    <p>Publicar Vaga</p>
   </div>
 </template>
 
 <script>
-
+export default{
+  name:'PublicarVaga'
+}
 </script>
 
 

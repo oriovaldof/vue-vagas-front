@@ -1,0 +1,79 @@
+<template>
+  <div>
+    <h1>{{titulo}}</h1>
+    <button @click="atualizarComponente()">Atualizar</button>
+    <Home></Home>
+    <PublicarVaga></PublicarVaga>
+  </div>
+</template>
+
+<script>
+import Home from "@/components/views/Home.vue";
+import PublicarVaga from "@/components/views/PublicarVaga.vue";
+export default {
+  name: "Conteudo",
+  components: {
+    Home,
+    PublicarVaga,
+  },
+  data:()=>({
+    teste: 'O componente foi criado',
+    titulo: 'Componente Conteúdo',
+  }),
+  methods:{
+    atualizarComponente(){
+      this.titulo +='*';
+    }
+  },
+  beforeCreate(){
+    console.log('Antes de Criar',this.teste);
+  },
+  created(){
+    console.log('Criado', this.teste)
+  },
+  beforeMount(){
+    console.log('Antes de montar o template')
+  },
+  mounted(){
+    console.log('Montado')
+  },
+  beforeUpdate(){
+    console.log('Antes de Atualizar')
+  },
+  updated(){
+    console.log('Atualizado')
+  },
+  beforeUnmount(){
+    console.log('Antes de desmontar/destruir')
+  },
+  unmounted(){
+    console.log('Desmontado/destruido');
+  },
+  /*errorCaptured(){
+    console.log('Erro Capturado')
+  },
+  renderTracked(){
+    console.log('Re-renderizacao rastreada');
+  },
+  renderTriggered(){
+    console.log('Re-renderizacao acionanda')
+  },
+  activated(){
+    console.log('Componente é ativado');
+  },
+  deactivated(){
+    console.log('Componente é desativado');
+  }*/
+};
+</script>
+
+
+<style module>
+
+.teste{
+  background-color: red;
+}
+#teste-2{
+  background-color: yellow;
+}
+</style>
