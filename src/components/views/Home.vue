@@ -2,72 +2,125 @@
   <div class="container py-4">
     <div class="row">
       <div class="col">
-        <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Pesquisar Vagas</h2>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="">Titulo da Vaga</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Pesquise por palavras chaves, por exemplo 'PHP','Pleno','Analista'"
-                />
-                <small class="form-text text-muted"
-                  >Informe palavras que estejam relacionadas com o título da
-                  vaga que você procura</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <button class="btn btn-outline-dark mt2" type="button">Buscar</button>
-            </div>
-          </div>
-        </div>
+        <PesquisarVaga></PesquisarVaga>
       </div>
     </div>
+
+    <div class="row mt-5" v-for="(vaga, index) in vagas" :key="index">
+      <div class="col">
+        
+        <Vaga 
+          :titulo="vaga.titulo"
+          :descricao="vaga.descricao"
+          :salario="vaga.salario"
+          :modalidade="vaga.modalidade"
+          :tipo="vaga.tipo"
+          :publicacao="vaga.publicacao"
+        />
+      </div>
+    </div>
+
     <div class="row mt-5">
       <div class="col-4">
-        <div class="h-100 p-5 rounded-3 border bg-dark text-white">
-          <p>Vagas abertas</p>
-          <h2>25</h2>
-        </div>
+        <Indicador
+          titulo="Vagas Abertas"
+          indicador="100"
+          bg="bg-dark"
+          color="text-white"
+        ></Indicador>
       </div>
+
       <div class="col-4">
-        <div class="h-100 p-5 rounded-3 border bg-dark text-white">
-          <p>Profissionais Cadastradas</p>
-          <h2>125</h2>
-        </div>
+        <Indicador
+          titulo="Profissionais Cadastrados"
+          indicador="225"
+          bg="bg-dark"
+          color="text-white"
+        ></Indicador>
       </div>
+
       <div class="col-4">
-        <div class="h-100 p-5 rounded-3 border bg-light text-dark">
-          <p>Visitantes online</p>
-          <h2>15</h2>
-        </div>
+        <Indicador
+          titulo="Visitantes Online"
+          :indicador="usuariosOnline"
+          bg="bg-light"
+          color="text-dark"
+        ></Indicador>
+        {{ usuariosOnline }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Indicador from "@/components/comuns/Indicador.vue";
+import PesquisarVaga from "@/components/comuns/PesquisarVaga.vue";
+import Vaga from "@/components/comuns/Vaga.vue";
+
 export default {
   name: "Home",
+  components: {
+    Indicador,
+    PesquisarVaga,
+    Vaga,
+  },
+  data: () => ({
+    usuariosOnline: 0,
+    vagas: [
+      {
+        titulo: "Analista Programador PHP Pleno",
+        descricao:
+          "Profissional com conhecimentos em PHP, Laravel e MySQL. Necessário 3 anos de experiências. Atuará na manutenção de sistemas legados da empresa.",
+        salario: '6000',
+        modalidade: "Home Office",
+        tipo: "PJ",
+        publicacao: "2021-10-10",
+      }/*,
+      {
+        titulo: "Programador JavaScript Angular",
+        descricao:
+          "Profissional com conhecimentos avançados em JavaScript e Angular.",
+        salario: 5000,
+        modalidade: "Presencial",
+        tipo: "CLT",
+        publicacao: "2021-10-07",
+      },
+      {
+        titulo: "Programador JavaScript Vue",
+        descricao:
+          "Profissional com conhecimentos avançados em JavaScript e Vue.",
+        salario: 5000,
+        modalidade: "Home Office",
+        tipo: "CLT",
+        publicacao: "2021-10-06",
+      },
+      {
+        titulo: "Analista de Banco de Dados Sênior",
+        descricao:
+          "Domínio dos bancos de dados SQL Server, Oracle, Postgre e MySQL",
+        salario: 9000,
+        modalidade: "Presencial",
+        tipo: "PJ",
+        publicacao: "2021-10-06",
+      },
+      {
+        titulo: "Programador Web Júnior",
+        descricao:
+          "Conhecimentos básicos em HTML, CSS, JavaScript, Bootstrap, PHP e MySQL",
+        salario: 3000,
+        modalidade: "Presencial",
+        tipo: "CLT",
+        publicacao: "2021-10-05",
+      },*/
+    ],
+  }),
+  methods: {
+    getUsuarioOnline() {
+      this.usuariosOnline = Math.floor(Math.random() * 101);
+    },
+  },
   created() {
-    console.log("Criado", this.teste);
-  },
-  activated() {
-    console.log("Componente é ativado");
-  },
-  deactivated() {
-    console.log("Componente é desativado");
-  },
-  beforeUnmount() {
-    console.log("Antes de desmontar/destruir");
-  },
-  unmounted() {
-    console.log("Desmontado/destruido");
+    setInterval(this.getUsuarioOnline, 1000); //chama a funcao a cada 1 segundo
   },
 };
 </script>
