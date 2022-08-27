@@ -1,9 +1,15 @@
 <template>
   <div>
-    <h1>{{titulo}}</h1>
+    <h1>{{ titulo }}</h1>
     <button @click="atualizarComponente()">Atualizar</button>
-    <Home></Home>
-    <PublicarVaga></PublicarVaga>
+    <button @click="conteudo = 'Home'">Home</button>
+    <button @click="conteudo = 'PublicarVaga'">Publicar Vaga</button>
+    <!--renderizar de modo dinamico os componentes home e publicar-vaga-->
+    <!-- <Home></Home>
+    <PublicarVaga></PublicarVaga> -->
+    <keep-alive>
+      <component :is="conteudo"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -16,16 +22,17 @@ export default {
     Home,
     PublicarVaga,
   },
-  data:()=>({
-    teste: 'O componente foi criado',
-    titulo: 'Componente Conteúdo',
+  data: () => ({
+    teste: "O componente foi criado",
+    titulo: "Componente Conteúdo",
+    conteudo: "Home",
   }),
-  methods:{
-    atualizarComponente(){
-      this.titulo +='*';
-    }
+  methods: {
+    atualizarComponente() {
+      this.titulo += "*";
+    },
   },
-  beforeCreate(){
+  /*beforeCreate(){
     console.log('Antes de Criar',this.teste);
   },
   created(){
@@ -49,7 +56,7 @@ export default {
   unmounted(){
     console.log('Desmontado/destruido');
   },
-  /*errorCaptured(){
+  errorCaptured(){
     console.log('Erro Capturado')
   },
   renderTracked(){
@@ -69,11 +76,10 @@ export default {
 
 
 <style module>
-
-.teste{
+.teste {
   background-color: red;
 }
-#teste-2{
+#teste-2 {
   background-color: yellow;
 }
 </style>
