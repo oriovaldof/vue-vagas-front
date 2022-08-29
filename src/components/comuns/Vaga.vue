@@ -17,21 +17,53 @@
 export default {
   name: "Vaga",
   // props: ["titulo", "descricao", "salario", "modalidade", "tipo", "publicacao"],
+  // props: {
+  //   titulo: String,
+  //   descricao: String,
+  //   salario: [Number, String],
+  //   modalidade: String,
+  //   tipo: String,
+  //   publicacao: String,
+  // },
   props: {
-    titulo: String,
-    descricao: String,
-    salario: [Number,String],
-    modalidade: String,
-    tipo: String,
-    publicacao: String,
+    titulo: {
+      type:String,
+      required:true,
+      validator(p){
+        // console.log('Prop: ', p, p.length);
+        if(p.length < 6 )return false; //se estiver invalido
+        return true; //se estiver valida
+        //return false; //se estiver invalido
+      }
+    },
+    // descricao: {
+    //   type:String,
+    //   required:true
+    // },
+    descricao: {
+      type:String,
+      // default:'O Contratante não adicionou uma descrição para essa vaga'
+      default(){
+        return '*'.repeat(20);
+      }
+    },
+    salario: {
+      type:[Number, String],
+      required:true
+    },
+    modalidade: {
+      type:String,
+      required:true
+    },
+    tipo: {
+      type:String,
+      required:true
+    },
+    publicacao: {
+      type:String,
+      required:true
+    },
   },
-  created() {
-    console.log("titulo", typeof this.titulo);
-    console.log("descricao", typeof this.descricao);
-    console.log("salario", typeof this.salario);
-    console.log("modalidade", typeof this.modalidade);
-    console.log("tipo", typeof this.tipo);
-    console.log("publicacao", typeof this.publicacao);
-  },
+ 
 };
 </script>
