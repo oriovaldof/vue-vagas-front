@@ -2,7 +2,7 @@
   <div>
     <h1>Componente App</h1>
     <button @click="desmontarComponente()">Desmontar o compomente Conteudo</button>
-    <TopoPadrao @nomeDoEventoQueSeraCapturadoNoComponentePai="acao($event)" />
+    <TopoPadrao @nomeDoEventoQueSeraCapturadoNoComponentePai="$event('Texto 1',125)" />
 
     <Conteudo v-if="visibilidade"></Conteudo>
   </div>
@@ -22,7 +22,7 @@ export default {
       this.visibilidade = false;
     },
     acao(p){
-      console.log('Chegamos até o componente PAI');
+      
       console.log(p.msg);
     }
   },

@@ -37,7 +37,11 @@ export default {
       // console.log('chegamos ate aqui')
       this.$emit(
         'nomeDoEventoQueSeraCapturadoNoComponentePai',
-        {msg:'Dando um oi para o componente PAI'}
+        (p1,p2) =>{
+          console.log('Função de callback emitida pelo componente filho');
+          console.log('P1:',p1);
+          console.log('P2:',p2);
+        }
         );
     },
   },
