@@ -23,7 +23,7 @@ export default {
     },
     acao(p){
       console.log('Chegamos até o componente PAI');
-      console.log(p);
+      console.log(p.msg);
     }
   },
   components: {
