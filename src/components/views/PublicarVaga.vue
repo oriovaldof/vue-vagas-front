@@ -75,7 +75,6 @@ export default {
   }),
   methods: {
     salvarVaga() {
-
       let tempoDecorrido = Date.now();
       let dataAtual = new Date(tempoDecorrido);
 
@@ -87,9 +86,18 @@ export default {
         salario: this.salario,
         modalidade: this.modalidade,
         tipo: this.tipo,
-        publicacao:dataAtual.toISOString()
+        publicacao: dataAtual.toISOString(),
       });
       localStorage.setItem("vagas", JSON.stringify(vagas));
+
+      this.resetaFormularioCadastroVaga();
+    },
+    resetaFormularioCadastroVaga() {
+      this.titulo = "";
+      this.descricao = "";
+      this.salario = "";
+      this.modalidade = "";
+      this.tipo = "";
     },
   },
 };
