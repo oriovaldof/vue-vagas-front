@@ -49,7 +49,6 @@
           bg="bg-light"
           color="text-dark"
         ></Indicador>
-        {{ usuariosOnline }}
       </div>
     </div>
   </div>
