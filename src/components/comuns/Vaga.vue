@@ -8,7 +8,7 @@
           </div>
           <div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox">
+              <input class="form-check-input" type="checkbox" v-model="favoritada">
               <label class="form-check-label">Favoritar</label>
             </div>
           </div>
@@ -31,6 +31,9 @@
 <script>
 export default {
   name: "Vaga",
+  data : ()=>({
+    favoritada:false
+  }),
   // props: ["titulo", "descricao", "salario", "modalidade", "tipo", "publicacao"],
   // props: {
   //   titulo: String,
@@ -98,6 +101,18 @@ export default {
       let dataPublicacao = new Date(this.publicacao);
       // return dataPublicacao.toLocaleString('pt-BR');
       return dataPublicacao.toLocaleDateString('pt-BR');
+    }
+  },
+  methods:{
+   
+  },
+  watch:{
+    favoritada(valorNovo){
+      if(valorNovo){
+        this.emitter.emit('favoritarVaga', this.titulo);
+      }else{
+        this.emitter.emit('desfavoritarVaga', this.titulo);
+      }
     }
   }
  

@@ -19,7 +19,7 @@
     >
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRightLabel">
-          Offcanvas right
+          Vagas Favoritadas
         </h5>
         <button
           type="button"
@@ -28,13 +28,33 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">...</div>
+      <div class="offcanvas-body">
+        
+        <ul class="list-group">
+          <li class="list-group-item" v-for="(vaga, index) in vagas" :key="index">{{vaga}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "VagasFavoritas",
+  data:()=>({
+    vagas:[]
+  }),
+  mounted(){
+    this.emitter.on('favoritarVaga',(titulo) =>{
+      // console.log('Favoritar: ',titulo);
+      this.vagas.push(titulo);
+    });
+    this.emitter.on('desfavoritarVaga',(titulo) =>{
+      // console.log('Desfavoritar: ',titulo);
+      let indiceArray = this.vagas.indexOf(titulo);
+      if(indiceArray !== -1) this.vagas.splice(indiceArray,1) //remover um elemento a partir de um indice do array
+
+    });
+  }
 };
 </script>
 <style scoped>
