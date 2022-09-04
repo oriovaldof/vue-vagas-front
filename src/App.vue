@@ -2,7 +2,7 @@
   <div>
     <VagasFavoritas></VagasFavoritas>
     <TopoPadrao @navegar="componente = $event" />
-    <Alerta v-if="exibirAlerta">
+    <Alerta v-if="exibirAlerta" :tipo="alerta.tipo">
      
       <template v-slot:titulo>
         <h5>{{alerta.titulo}}</h5>
@@ -30,7 +30,8 @@ export default {
     exibirAlerta: false,
     alerta:{
       titulo:'',
-      descricao:''
+      descricao:'',
+      tipo:''
     }
   }),
   methods: {},
@@ -46,7 +47,6 @@ export default {
       this.exibirAlerta = true;
 
       setTimeout(() => (this.exibirAlerta = false), 4000);
-      console.log("Apresentar a mensagem de alerta customizada");
     });
   },
 };
