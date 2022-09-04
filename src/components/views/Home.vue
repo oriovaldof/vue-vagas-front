@@ -83,6 +83,17 @@ export default {
   // }
   activated(){
     this.vagas = JSON.parse(localStorage.getItem('vagas'));
+  },
+  mounted(){
+    this.emitter.on('filtrarVagas', vaga => {
+      // console.log(vaga);
+      const vagas = JSON.parse(localStorage.getItem('vagas'));
+      console.log(vagas);
+      this.vagas = vagas.filter(reg => reg.titulo.toLowerCase().includes(vaga.titulo.toLowerCase()));
+
+      
+
+    });
   }
 };
 </script>
