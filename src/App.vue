@@ -5,10 +5,10 @@
     <Alerta v-if="exibirAlerta">
      
       <template v-slot:titulo>
-        <h5>Titulo do alerta</h5>
+        <h5>{{alerta.titulo}}</h5>
       </template>
       
-      <p>Descricao do alerta</p>
+      <p>{{alerta.descricao}}</p>
 
     </Alerta>
 
@@ -28,6 +28,10 @@ export default {
     visibilidade: true,
     componente: "Home",
     exibirAlerta: false,
+    alerta:{
+      titulo:'',
+      descricao:''
+    }
   }),
   methods: {},
   components: {
@@ -37,7 +41,8 @@ export default {
     VagasFavoritas,
   },
   mounted() {
-    this.emitter.on("alerta", () => {
+    this.emitter.on("alerta", (a) => {
+      this.alerta = a;
       this.exibirAlerta = true;
 
       setTimeout(() => (this.exibirAlerta = false), 4000);
