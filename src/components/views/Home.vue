@@ -6,22 +6,18 @@
       </div>
     </div>
 
-    <div class="row mt-5" v-for="(vaga, index) in vagas" :key="index">
-      <div class="col">
-       <!--Exemplo Eviando os props separados--> 
-        <!-- <Vaga 
-          :titulo="vaga.titulo"
-          :descricao="vaga.descricao"
-          :salario="vaga.salario"
-          :modalidade="vaga.modalidade"
-          :tipo="vaga.tipo"
-          :publicacao="vaga.publicacao"
-        /> -->
-
-        <!--Exemplo eviando o objeto inteiro para o componente-->
-        <Vaga v-bind="vaga" />
+    <h2>Template Customizado</h2>
+    <ListaVagas v-slot:default="slotPropos">
+      <div v-for="(vaga, index) in slotPropos.vagas" :key="index">
+        <h4>{{ vaga.titulo }}</h4>
+        <p>{{ vaga.descricao }}</p>
+        <hr />
       </div>
-    </div>
+    </ListaVagas>
+
+    <br /><br />
+    <h2>Template Padrao</h2>
+    <ListaVagas></ListaVagas>
 
     <div class="row mt-5">
       <div class="col-4">
@@ -56,19 +52,18 @@
 
 <script>
 import Indicador from "@/components/comuns/Indicador.vue";
+import ListaVagas from "@/components/comuns/ListaVagas.vue";
 import PesquisarVaga from "@/components/comuns/PesquisarVaga.vue";
-import Vaga from "@/components/comuns/Vaga.vue";
 
 export default {
   name: "Home",
   components: {
     Indicador,
+    ListaVagas,
     PesquisarVaga,
-    Vaga,
   },
   data: () => ({
     usuariosOnline: 0,
-    vagas: [],
   }),
   methods: {
     getUsuarioOnline() {
@@ -81,20 +76,6 @@ export default {
   // mounted(){
   //   this.vagas = JSON.parse(localStorage.getItem('vagas'));
   // }
-  activated(){
-    this.vagas = JSON.parse(localStorage.getItem('vagas'));
-  },
-  mounted(){
-    this.emitter.on('filtrarVagas', vaga => {
-      // console.log(vaga);
-      const vagas = JSON.parse(localStorage.getItem('vagas'));
-      console.log(vagas);
-      this.vagas = vagas.filter(reg => reg.titulo.toLowerCase().includes(vaga.titulo.toLowerCase()));
-
-      
-
-    });
-  }
 };
 </script>
 <style scoped>
